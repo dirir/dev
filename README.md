@@ -1,4 +1,4 @@
-# This is a initial repository 
+# This is an initial repository 
 ## GitHub getting started on this projetcs
 Specialized in a range of technologies to power your businesses and projects:
 ### Programming languages and Services:
