@@ -1,0 +1,58 @@
+<html  xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+	<meta charset="utf-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<title>Product Manager</title>
+</head>
+<body>
+<div  class="container">
+	<div sec:authorize="isAuthenticated()">
+    	Welcome <b><span sec:authentication="name">Username</span></b>
+    	&nbsp;
+    	<i><span sec:authentication="principal.authorities">Roles</span></i>
+	</div>
+	<form th:action="@{/logout}" method="post">
+    	<input type="submit" value="Logout" />
+	</form>
+	
+    <h1>Product List</h1>
+    <a href="newproducttype">Create New ProductType</a>
+    <br/>
+    <a href="new">Create New Product</a>
+    <br/><br/>
+    <table class="table table-striped table-hover table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Product ID</th>
+                <th>Name</th>
+                <th>Brand</th>
+                <th>Made In</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody align="center">
+            <tr th:each="product : ${listProducts}">
+            	<td th:text="${product.id}">Product ID</td>
+                <td th:text="${product.name}">Name</td>
+                <td th:text="${product.brand}">Brand</td>
+                <!-- <td th:each="ptype : ${pTypes}"
+                	th:text="${ptype.name}">
+                </td> -->
+                <td th:text="${product.madein}">Made in</td>
+                <td th:text="${product.price}">Price</td>
+                <td>
+                	<a th:href="@{'/edit/' + ${product.id}}">Edit</a>
+                	&nbsp;&nbsp;&nbsp;
+                	<a th:href="@{'/delete/' + ${product.id}}">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>    
+</body>
+</html>
